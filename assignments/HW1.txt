@@ -1,0 +1,283 @@
+#######################################
+#   LIN 127
+#   Text Processing and Corpus Linguistics
+#   Assignment 1
+#######################################
+
+Welcome to week 1!
+
+This file is your assignment for the week. We'll be settling in to using the terminal, working with Bash, navigating the filesystem, and so on. The last part of the assignment will involve using what you learned to submit an edited version of this file using a submission script.
+
+Notation:
+  - I'll use >>> to indicate where to put your answers.
+  - When I mention a command inline you can run, I'll surround it with backticks like so: `cd`.
+
+Important Unix notes:
+  - Most (but not all) Unix commands and programs can be quit out of by typing Ctrl-c. Use `q` to quit `man` or `less`.
+  - You can exit your terminal with the command `exit`, and use this as well to leave an SSH session and return to your local shell.
+
+Once you've completed the assignment, come back up here (in your command-line text editor) and fill these questions out:
+
+Name:
+>>> Adriano Melo Filho
+
+Email:
+>>> amelo@ucdavis.edu
+
+Any comments or questions?
+>>> Nope. 
+
+
+######################
+# Core Exercises (1-8)
+######################
+
+#### 1. Get on the Command Line
+
+In this class we will be using Bash, which is a type of textual command-line interpreter - a "shell" - for Unix-like systems. We'll discuss Unix a bit in class, but basically it refers to a family of operating systems, and there are many Unix-like derivatives, including the whole Linux ecosystem which you've probably heard about. If you want more context on the history of Unix/Linux and the differences between them, here's a fun video:
+https://www.youtube.com/watch?v=jowCUo_UGts
+
+But for the purposes of this class, your first goal is to find a way to run a Unix-like terminal on your computer. How to do this depends on the operating system you're running.
+
+--- OSX ---
+If you're running Mac OSX, it's pretty straightforward since Mac OSX is a Unix-like operating system and so already comes with a Terminal app. It will be in the Utilities folder in Applications (or you can search "Terminal" in Spotlight).
+
+--- Linux ---
+If you're running Linux, it differs by distribution, but a terminal of some sort should be among the default applications on your system. On Ubuntu, for instance, you can open one with the keyboard shortcut Ctrl+Alt+T.
+
+--- Windows ---
+If you're running Windows 10/11, that's the trickiest situation. You have to install what is called the Windows Subsystem for Linux (WSL). This allows you to run Linux natively directly within Windows; many professional programmers do this. There are instructions to install it here:
+  https://learn.microsoft.com/en-us/windows/wsl/install
+
+Following these instructions will install the Ubuntu distribution of Linux in WSL. You are welcome to try other distributions, but if you're just getting started with this kind of thing I *strongly* recommend you stick with this default.
+
+Once it's installed, you need a terminal emulator, the actual software you type commands into. The easiest solution is probably to simply use Windows Terminal:
+  https://apps.microsoft.com/detail/9n0dx20hk701
+
+There are other options, such as MobaXTerm (https://mobaxterm.mobatek.net/), which have other functionality like connecting to remote servers.
+
+
+#### 2. Make sure you're running Bash
+
+Okay, now you're sitting on a command line. Is it Bash though? There are other shells people use, most commonly zsh. For this class let's all use Bash to make sure things run the same.
+
+Notational reminder - thoughout this class, when I'm asking you to run a command I will use backticks (`). This is the most common notation to indicate "code." So the first command I want you to run is `echo $SHELL`. This means, on your open terminal, type:
+
+echo $SHELL
+
+and press enter. For Linux and Windows (WSL) this is likely to already print out "bash". I believe the default terminal shell for Mac OSX is zsh, so it may return "zsh". (By the way, to "return" refers to the output of a program. Running that command is running a simple program, and whatever is printed out to the terminal, a.k.a. console, is what that program "returned.")
+
+So what did that command do? The $SHELL means there is a variable called SHELL and we want to access it, and `echo` is the name of a command which just prints out whatever is passed to it. So that command means, "Please print out whatever is saved with the variable name SHELL."
+
+This is likely, but not 100% guaranteed to be the currently running shell. Try also running `ps -p $$`. This will show some more information, it's equivalent to asking "show me details about the current shell process." You should also see "bash" here.
+
+If in either case you don't, and see something else (most likely "zsh"), you're not running Bash. *Most* things for the class will work with other shells but there could be subtle issues so I strongly suggest you use Bash. You have two options on how to do this.
+
+One is you can run `bash` before doing work for this class, which should load the bash shell in the terminal window. The problem is you have to remember to do this every time. 
+
+Switching the default differs by which OS/terminal you're using. Mac OSX is the most likely one running another shell (zsh). To switch the default there, follow these instructions, providing "/bin/bash" as the "Command (complete path)":
+https://support.apple.com/guide/terminal/change-the-default-shell-trml113/mac
+
+On Linux and Windows (WSL) you're very likely already on Bash, but if not to change the default shell you can use `chsh -s /bin/bash`.
+
+If you still have problems then ask for help!
+
+
+#### 3. Set up your assignment directory
+
+Okay, now you're set up! You've got a terminal and you're running Bash. When you open a new terminal, you'll be in your home directory (~). If you list the directory (`ls`) you'll see its contents. On Windows (WSL) it will likely be empty and thus print a blank line; on Linux or Mac OSX you'll likely see more files and directories.
+
+You now need to decide on where your work for this course will live. It can either be in a subdirectory of your home directory, or somewhere else on your filesystem. If somewhere else, navigate to where you want to put it (`cd`).
+
+Use `mkdir` to create a directory called 'lin127', and `cd` into it. We'll call this your "main course directory." Use `mkdir` again to create a directory named 'a1', and `cd` into that.
+
+Now you're in the directory where you'll put this assignment for me to check out. For reference, you can see the full path where you are at any time by running the `pwd` command, which stands for "print working directory" - for example, since I'm on Linux, if I were to put my course directory in my home directory, `pwd` would show me: "/home/robvoigt/lin127/a1".
+
+
+#### 4. Obtain and look at this file
+
+Now you'll get this file into your homework directory so we can start working with it. `wget` is a command for obtaining files from the internet. Copy this url from your web browser. While still in your assignment directory, use the `wget` command with the url of this file as an argument to download it.
+
+Note: Copy-pasting the url into your terminal might be slightly different depending on which OS and terminal program you're running, so that's one thing to figure out because it will be useful over and over.
+
+Now if you run `ls`, you should see "a1.txt" in the directory.
+
+Run `cat a1.txt`; it will print the entire contents of the assignment to the terminal. `cat` stands for concatenate, because you can list multiple files as arguments and they'll all print concatenated one after the other. But, it's often used just to print things out on the terminal.
+
+Run `less a1.txt`; this opens a program called `less` which is useful for viewing text files. You can navigate with your arrow keys and pgup/pgdown, and search by typing '/' then your query. Typing '/'+enter after a search goes to the next found instance of the search. Press `q` to quit out of `less`.
+
+An *extremely* useful command for understanding files you're working with is `wc` (for "word count"). Look it up with `man wc`. Do these problems before editing this file at all, and come back and fill in the answer after you've figured out your text editor in the next section.
+
+a. According to `wc`, how many words are in this assignment?
+>>> 3350 Words
+
+b. How many lines are in this assignment?
+>>> 283 Lines
+
+c. How many characters long is the longest line in the assignment?
+>>> 573 chars
+
+
+#### 5. Working with a text editor
+
+Human-readable text is a "universal interface" for working with computers on the command line, and programming is basically a process of writing down what you want the computer to do. So text editors are a well-developed sort of program with many options and a long history, and not a small amount of controversy as far as what people prefer. For the first portion of this course, I want you to work in a command-line text editor.
+
+Here are the main possible text editor programs to choose from:
+
+`nano`
+The simplest option to get started. It opens a text buffer - a screen to write text on - and displays the available commands at the bottom of the screen. Note that ^ refers to the Ctrl key, so ^X will exit the program. If you plan to use nano regularly, I strongly suggest you use it to create a file called ".nanorc" in your home directory and add these lines:
+
+set tabsize 4
+set softwrap
+include "/usr/share/nano/python.nanorc"
+include "/usr/share/nano/sh.nanorc"
+
+Files starting with a period are called 'dotfiles', and they're a type of hidden file - for instance, they won't show up when you run `ls` unless you add the '-a' flag (for 'show all'). Often dotfiles are used to set various sorts of configurations on the command line. In this case nano will read this .nanorc file every time you open nano and run the commands in those lines, which will make it so your tab size is 4 spaces (instead of the default 8) and the appropriate syntax for command line scripts and python code is highlighted (will be very useful in later weeks).
+
+
+`emacs`
+My recommendation. Easy to learn, a lifetime to master. Very extensible with a billion features, can even be a calendar, web browser, todo list, etc, and some people organize their whole lives in it. There is a useful cheatsheet of commands here:
+  https://www.gnu.org/software/emacs/refcards/pdf/refcard.pdf
+The most important ones to know are:
+   Ctrl-x then Ctrl-s (save/write file)
+   Ctrl-x then Ctrl-c (quit
+
+
+`vim`
+Harder to learn, also a lifetime to master. It's a "modular" editor meaning it switches between modes that do different things like insert, replace, and select. A good quick intro lesson is here:
+  https://www.youtube.com/watch?v=ggSyF1SVFr4
+You can't actually type in the normal mode, you can only navigate and manipulate text (like deleting entire lines). You press 'i' to switch to insert mode which allows you to more or less type normally, then pressing Esc returns to "normal" mode. Commands are generally prefaced with a colon. The most important commands in normal mode are:
+  :w (save/write the file)
+  :wq (save/write the file and quit)
+  :q (quit)
+  :q! (quit discarding changes)
+
+Ultimately if you keep programming it will pay off to learn emacs or vim. Nano will be enough for this class, but I actually recommend emacs since it's a happy medium - much easier to learn than vim, but with some nice features built right in like automatic code highlighting and spacing. And with emacs as long as you know how to save and how to quit, you can just open it and type normally.
+
+
+#### 6. Introductions!
+
+Now that we've got some basics down of how to move and shake in the terminal, and how to edit text files, I just want to know more about you! Use your text editor to fill in answers to the questions below.
+
+a. What is your computational background?
+>>> cs student looking to get a little more
+
+b. What is your linguistics background?
+>>> Very little. I learned a little bit about syntax, semantics during the compilation in ecs140a.
+
+c. Why are you interested in taking this class? What are your goals for this class?
+>>> I'm doing this mainly for the CS elective (with SS and AH) credit to graduate this spring. But also, when I transfered from CC to UC Davis, I feel as though I never had a course with this much focus on CLI. I would like to get more practice with the CLI. Additionally, it's been a while since I've written anything in python and would like to refresher. 
+
+d. Do you have any preliminary thoughts on what you might like to do for a final project? If you have existing research or projects that could be helped by these methods, I encourage double-dipping. If you don't know yet, that's okay too.
+>>> I was interested in doing a python version of one of my ECS160 assingments (java) where I use the git rest API to pull information about specific repos, parse json and create a  report based on my findings (lang with most open issue, commits, etc). Alternatively, I could I also parse the info and store it in a redis server instead of reporting on repos. 
+
+e. Is there anything else you want me to know about you or your situation coming into this class? This could include things like names or pronouns, learning style, questions about whether this class is a good fit, or whatever else you'd like to share.
+>>> Nope. Excited to be here!
+
+#### 7. Navigation, tab completion, and shortcuts
+
+At this point I recommend opening two terminal windows, one with this file open in your text editor so you can write answers, and the other available to do the exercises. Otherwise you'll have to keep closing and re-opening the assignment to do anything. 
+
+a. Go to your main lin127 directory. Type `cd `, and press the tab button on your keyboard twice. What happens? Is it like the output from any other program you've used already?
+>>> On macOS, since a1 only had one file, it autocomplete the line with single directory, single file to "cd a1/a1.txt."
+
+b. What if you press tab twice after `cd` with no following space? What do you think this output means, and why is it different without the space?
+>>> On mac, pressing tab without white space creates the white space then it looks through first file of your dir (alphabetically). 
+
+c. Run `cd` by itself, with no directory specified after it. What happens?
+>>> Nothing. Terminal jumps to next command line. 
+
+d. Command History: In most terminal emulators you can navigate through your history of commands with the up and down arrows. You can also search through your history by typing Ctrl-r: this opens a prompt to type in some search material, and while searching pressing Ctrl-r again cycles through commands in the history that match.
+
+Get back to your course directory without typing out the directory name. How did you do it?
+>>> Enter "cd.."
+
+e. Try running `cd -` a few times. What happens?
+>>> It swaps the current directory to the it's parent directory. Pressing it a second time swaps back to the original path. 
+
+
+#### 8. Navigation and file creation
+
+a. Navigate to your home directory (`cd ~`). From there, use `mkdir` repeatedly (navigating around if you need to) to make a nested series of directories that looks like this:
+
+this/is/a/deep/directory
+
+b. Use `touch` to create a file called 'is_just_a_file' in the 'this' directory.
+
+c. `cd` all the way in to the 'directory' directory. `touch` a file called 'and_a_hiding_file'.
+
+d. Just as '~' is a special character representing your home directory, '..' is a symbol referring to the directory one level up in the hierarchy. You can chain these symbols to refer to directories far upward, e.g. '../../../../../' refers to the directory five levels up in the hierachy. Without leaving the deepest directory, use `touch` to create a file called 'another_file' in the 'is' directory.
+
+e. `cd` back to your home directory, and try to delete the 'this' directory with `rm`. What happens?
+>>> On mac, "rm this" gives the message "rm: this: is a directory."
+
+f. Now using `rm` but without using `cd`, delete the 'is_just_a_file' file.
+
+g. I/O redirection - this was mentioned in the "Missing Semester" video lecture, but we'll talk about it much more next week. For now the thing to know is that `>` takes the output of some command to the left of it, and saves it in the filename given to the right of it (creating the file if it doesn't exist). Using `echo` and `>`, create a file called 'is_yet_another_file' in the 'this' directory containing the text 'with stuff in it.'
+
+h. The `find` command recursively prints all the files in a directory . Try running it on the 'this' directory. Now use `>` again to save the outputs of that command to a file called 'contents'.
+
+i. Use `mv` to move the entire 'this' directory structure into your a1 folder - this should only take running `mv` once. Then run `mv` again to put the 'contents' file there too.
+
+Done with the core exercises! If you haven't yet, please remember to fill out the top of the file - your name, time spent, and any questions/comments.
+
+
+#### 9. Submitting your assignment(s)
+
+In this course you will submit your assignments using a purpose-built script to send the code and outputs to my server (robvoigt.net). Here's how to do it!
+
+First, navigate to your top-level lin127 course directory - not this assignment's directory, one up from that, the first one you made.
+
+Now you have to create a file that lets the submission script (and me) know who is submitting. Use a text editor to create a file called 'identity.txt'. In that file should be three things, separated by commas: your name, your main ucdavis.edu email (the one I have on my course roster), and a random secret word (pick anything). So say if I pick 'banana' as my secret word, my file would contain only and exactly the following line:
+
+Rob Voigt,robvoigt@ucdavis.edu,banana
+
+The point of the random word is kind of like a very low-security password (I don't want to have your real password for anything!!), that we'll use to make sure only you can access feedback on your assignments.
+
+Then, download the submission script by running `wget https://robvoigt.net/lin127/submit.py`.
+
+Finally, run it to submit this file by running `python3 submit.py a1`. It will contact the server, send your A1 files, and let you know if it was successful or not. You can submit any assignment as many times as you want if you go back to fix things - the only hiccup is there is a 10-minute delay enforced between successful submissions so the server doesn't get bombarded. If you got this far, congrats, you did A1!
+
+
+######################
+# Extra Exercises (10-11)
+######################
+
+
+#### 10. Text editor wars!
+
+I mentioned previously that there's a lot of controversy and differing opinions about text editors. I also mentioned that it's worth ultimately learning vim or emacs if you intend to keep programming - there's an input cost to learning but the speed and functionality you gain will pay off in the long run.
+
+Do a bit of looking into vim and emacs, and which you might prefer. One place to get some context is this Wikipedia article:
+  https://en.wikipedia.org/wiki/Editor_war
+Or you can just do some googling. Or choose randomly. In any case, pick one and try doing the tutorial they provide.
+
+For emacs do:
+  emacs
+  Ctrl-h then 't'
+
+For vim do:
+  vimtutor
+
+Try to get through one or both of the tutorials! Let me know which you did, and how you found it!
+>>> I didn't watch a video. Im currently taking STS115 and we spent a chunk of our last lecture learning some basics for vim 
+
+
+#### 11. Aliasing
+
+Here we're going to create an 'alias' which allows you to make a new command that's a shortcut for another, more complicated command, potentially with arguments. We'll do this in a 'dotfile' (see the description of dotfiles in the part of section 4 about nano) called '.bash_aliases'.
+
+Open a new Bash terminal window on your computer. We're going to make a new command called "lin127" that takes us to our course directory.
+
+First, identify the full path of your course directory by navigating there and typing `pwd`. 
+
+Now, using your new expertise with your text editor, open the file '.bash_aliases' in your home directory. This file will likely be blank. Once you open the file, write a new line that looks like this (including the quotes, but substituting the final /your/path/here with the output of the above `pwd`):
+
+alias lin127="cd /your/path/here"
+
+Notice how in the quotes we have this more complex command with arguments, which could in fact be arbitrarily complex. Now "lin127" will be an alias for it, so this will allow us to run that more complex command just by running `lin127`. 
+
+Save the dotfile and quit, then close and re-open your terminal. Try typing your alias, and see what happens! If it isn't working, you may need to also edit the file called ~/.bashrc to include a line that reads `source ~/.bash_aliases`. This tells bash upon opening to also look in .bash_aliases for any additional commands to run. Look here for reference: https://www.raspberrypi.org/documentation/linux/usage/bashrc.md
+
+Try making another alias that makes it so you can type 'hi' on your terminal and your terminal will reply and ask how you're doing. What line did you add to .bash_aliases?
+>>>
