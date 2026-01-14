@@ -13,6 +13,8 @@ This chapter introduces I/O redirection, one of the most powerful features of th
 - head – Output the first part of a file
 - tail – Output the last part of a file
 - tee – Read from standard input and write to standard output and files
+- grep - 
+- history 
 
 ---
 
@@ -354,7 +356,6 @@ Given a directory containing:
 
     Desktop Documents Music Pictures Public Templates Videos
 
-**Examples:**
 |Command|Output|
 |:-|:-|
 |`echo D*`|Desktop Documents|
@@ -366,7 +367,7 @@ Given a directory containing:
 
 ### Hidden Files and Expansion
 
-***Hidden files*** begin with a period (.).
+***Hidden files*** begin with a period (`.`).
 
 This does NOT show hidden files:
 
@@ -376,7 +377,7 @@ This almost works:
 
     echo .*
 
-But it includes . and .. (current and parent directories).
+But it includes `.` and `..` (current and parent directories).
 
 Demonstration:
 
@@ -392,7 +393,7 @@ Alternatively:
 
 ---
 
-### Tilde Expansion (~)
+### Tilde Expansion (`~`)
 
 The tilde expands to a user’s home directory.
 
@@ -416,7 +417,6 @@ Arithmetic expansion allows integer math using: `$((expression))`:
 
     echo $((2 + 2)) //output = 4
 
-**Other Examples:**
 
 |Command Type|Command|Output|
 |:-|:-|:-|
@@ -593,7 +593,7 @@ A backslash escapes a single character:
 
     sleep 10; echo -e “Time’s up\a”
 
-Alternative:
+Alternatively:
 
     sleep 10; echo “Time’s up” $’\a’
 
@@ -608,3 +608,102 @@ Alternative:
 - Understanding expansion prevents errors and surprises
 
 Without understanding expansion and quoting, the shell feels unpredictable. With it, the shell becomes precise, powerful, and reliable.
+
+## Chapter 8: Advanced Keyboard Tricks
+
+### Introduced Commands:
+
+- NA
+
+---
+
+Unix users value short commands like cp, ls, mv, and rm, and bash reinforces this philosophy by letting users do more work with fewer keystrokes and without touching the mouse. This chapter focuses on advanced keyboard tricks that make command-line work faster, introducing utilities like clear (which clears the screen) and history (which displays previously entered commands). 
+
+Bash relies on the **Readline library** to implement command-line editing, which provides many cursor movement and editing features beyond the arrow keys. You do not need to memorize them all, but selectively learning useful ones can significantly speed up work. Some key combinations—especially those using Alt—may be intercepted by graphical environments, though they work reliably in virtual consoles.
+
+**Cursor movement commands allow precise navigation within a command line:**
+- `Ctrl-a` jumps to the beginning of the line
+- `Ctrl-e` to the end of line
+- `Ctrl-f` move forward one character
+- `Ctrl-b` move backward one character (like the arrow keys)
+- `Alt-f`/`Alt-b` move by whole words.
+- `Ctrl-l` the screen itself can be cleared and reset, which performs the same action as the clear command.
+
+**Editing commands help fix mistakes efficiently:**
+- `Ctrl-d` deletes the character at the cursor,
+- `Ctrl-t` swaps the current character with the previous one, and
+- `Alt-t` swaps words.
+- You can also change letter case mid-command using `Alt-l` to lowercase or `Alt-u` to uppercase text from the cursor to the end of the word.
+
+Cutting and pasting text—called “killing” and “yanking” in Readline—uses a temporary buffer known as the **kill-ring**. Text can be removed using commands: 
+- `Ctrl-k` (kill to end of line), 
+- `Ctrl-u` (kill to beginning of line), 
+- `Alt-d` (kill to end of word), and 
+- `Alt-Backspace` (kill to beginning of word or the previous word). 
+- Removed text can then be reinserted at the cursor with `Ctrl-y`.
+
+These operations make it easy to restructure long commands without retyping them. The Alt key functions as the **“meta” key** in Readline, a concept that dates back to older terminals that lacked dedicated modifier keys. On modern systems `Alt` serves this role, but pressing `Esc` can also simulate Meta behavior.
+
+Bash also helps reduce typing through **completion**, which is triggered by pressing the `Tab` key. For example, given a directory listing like:
+
+    [me@linuxbox ~]$ ls
+    Desktop ls-output.txt Pictures Templates Videos Documents Music Public
+
+typing:
+
+    [me@linuxbox ~]$ ls l
+
+and pressing Tab expands the command to:
+
+    [me@linuxbox ~]$ ls ls-output.txt
+
+If the input is ambiguous, such as typing `ls D` when multiple entries begin with D, no completion occurs. Narrowing it to `ls` Do and pressing Tab completes it to:
+
+    [me@linuxbox ~]$ ls Documents
+
+Completion works not only for pathnames, but also for variables (words starting with $), usernames (~), commands (first word on the line), and hostnames (@, limited to /etc/hosts). You can display possible completions with Alt-? (or by pressing Tab twice) and insert all possible matches with Alt-*. More advanced, programmable completion allows distributions to define custom completion rules—often for command options or file types—implemented via shell functions. You can inspect these with:
+
+    set | less
+
+**Command history** is another major typing shortcut. Bash stores previously executed commands in `~/.bash_history`, typically keeping the last 1000 entries by default. You can view them with:
+
+    [me@linuxbox ~]$ history | less
+
+and filter them using tools like `grep`, for example:
+
+    [me@linuxbox ~]$ history | grep /usr/bin
+
+If this yields a result such as:
+
+    88 ls -l /usr/bin > ls-output.txt
+
+you can rerun that command using history expansion:
+
+    [me@linuxbox ~]$ !88
+
+Bash also supports **incremental history search** with `Ctrl-r`. Pressing `Ctrl-r` changes the prompt to:
+
+    (reverse-i-search)`':
+
+Typing /usr/bin immediately searches backward through history:
+
+    (reverse-i-search)`/usr/bin': ls -l /usr/bin > ls-output.txt
+
+Press Enter to execute it, or Ctrl-j to copy it onto the command line for editing:
+
+    [me@linuxbox ~]$ ls -l /usr/bin > ls-output.txt
+
+Other history navigation keys include Ctrl-p and Ctrl-n (previous/next command), Alt-< and Alt-> (jump to top or bottom of history), and Ctrl-o, which executes a history entry and moves to the next one—useful for replaying command sequences.
+
+History expansion provides additional shortcuts using !. !! repeats the last command, !number repeats a specific history entry, !string repeats the most recent command starting with a string, and !?string repeats the most recent command containing a string. Because these can be risky if you are unsure of the match, you can preview expansions safely with :p, such as:
+
+    [me@linuxbox ~]$ !ls:p
+    ls -l /usr/bin > ls-output.txt
+
+This prints the expanded command and places it into history without executing it, allowing you to run it afterward using the up arrow or !!. The expansion itself is not saved—only the resulting command is.
+
+Finally, beyond interactive history, many Linux systems include the script command, which records an entire shell session to a file. Its basic usage is:
+
+    script [file]
+
+If no filename is provided, output is saved to typescript. This is useful for logging sessions or capturing demonstrations. Overall, the chapter emphasizes that these keyboard tricks are optional but powerful tools. As you spend more time on the command line, selectively adopting them can dramatically reduce effort and speed up everyday work.
