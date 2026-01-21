@@ -11,12 +11,12 @@
 
 - Use the specific naming conventions from assignment
     - no spaces, etc
-- answer between `>>> start` and `>>> end` 
+- answer between `>>> start` and `>>> end`
 - wc returns the number of `<newline>` chars, aka `\n`
     - this is how it counts lines
     - try `-S` and `-N` flags on `less`
 - Dotfiles (.bashrc and .nanorc)
-    - Save us from doing repetivtive tasks 
+    - Save us from doing repetivtive tasks
     - bash/nano
     - good to store hidden files (config, persistant mem)
 - Errors
@@ -44,23 +44,42 @@
     - Check out links for extra practice
         - [Bash Tutorial Website (YSAP)](https://ysap.sh/)
 - AI Policy
-    - Use duckduck go 
+    - Use duckduck go
 
 
 ### Week 2 Concepts
 
 #### Unix:
 
-- Unix operates line by line
-    - We're creating a pipeline where order matters (command order)
-    - Class Clay Example:
-        - We want a random line with at least one num and uppercase letter
-        - **Prof Strat**: Carve away at original body of data (clay)
-            1. We remove all the lines that don't contain what we're looking for 
-    - Unix Philosophy:
-        - One program does one thing:
-            - Write 
-- Abstractions
-- Decomposition
 
+The Unix philosophy underpins everything in this course:
+- write programs that do one thing well,
+- write programs that work together,
+- write programs that handle text streams
+
+This philosophy enables **abstraction**, where you trust commands to do their job correctly without worrying about implementation details, and **decomposition**, where large problems are solved by breaking them into small, manageable steps. 
+
+**Pipes**—originally invented by Doug McIlroy—are the mechanism that allows these small tools to work together seamlessly.
+
+###
+
+# Notes 1/14
+
+Spent most of class doing hw2. 
+
+### Scripting:
+#### my_flipper:
+We can create scripts (.sh). Use `$` for parameters for script.
+
+The script:
+
+    echo clean_$1 clean_$1
+
+If we run:
+
+    bash my_flipper.sh hello world
+
+We get the output:
+
+    clean_hello clean_world
 

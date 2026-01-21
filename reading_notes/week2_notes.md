@@ -628,6 +628,7 @@ Bash relies on the **Readline library** to implement command-line editing, which
 - `Ctrl-b` move backward one character (like the arrow keys)
 - `Alt-f`/`Alt-b` move by whole words.
 - `Ctrl-l` the screen itself can be cleared and reset, which performs the same action as the clear command.
+    - control l + c to clear or type `clear` to clear console
 
 **Editing commands help fix mistakes efficiently:**
 - `Ctrl-d` deletes the character at the cursor,

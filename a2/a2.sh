@@ -107,7 +107,7 @@ echo ''
 # '/'+'enter' a second time will find the next instance of your search.
 echo '1.a. Obtain the complete works of Shakespeare (using wget)! Make sure to rename the file as "shakes.txt" as you download it.'
 # >>> YOUR ANSWER HERE
-wget https://robvoigt.net/lin127/a2/shakespeare.txt | mv shakespeare.txt shakes.txt
+wget -O shakes.txt https://robvoigt.net/lin127/a2/shakespeare.txt
 # >>> END YOUR ANSWER
 echo ''
 
@@ -174,7 +174,7 @@ echo ''
 # open the file using it to answer these questions.
 echo "3.c. What line does Shakespeare's eighteenth sonnet start on in the file?"
 # >>> YOUR ANSWER HERE
-echo '[298]'
+echo '[297]'
 # >>> END YOUR ANSWER
 echo ''
 
@@ -195,7 +195,7 @@ echo ''
 
 echo "3.f. How many words are in Shakespeare's eighteenth sonnet?"
 # >>> YOUR ANSWER HERE
-115
+head -n 312 shakes.txt | tail -n 15 | wc -w
 # >>> END YOUR ANSWER
 echo ''
 
@@ -212,7 +212,7 @@ echo ''
 # characters after grep will match lines containing that exact string.
 echo "4.a. Print all the lines containing 'commendable'."
 # >>> YOUR ANSWER HERE
-
+grep -E 'commendable' shakes.txt
 # >>> END YOUR ANSWER
 echo ''
 
@@ -221,7 +221,7 @@ echo ''
 # a flag for grep that allows us to ignore case.
 echo "4.b. Print all the lines containing 'conspiracy' or 'Conspiracy'."
 # >>> YOUR ANSWER HERE
-
+grep -i 'conspiracy' shakes.txt
 # >>> END YOUR ANSWER
 echo ''
 
@@ -230,19 +230,19 @@ echo ''
 # [Cc] in place of either 'c' or 'C' to match both.
 echo "4.c. Print all lines containing 'concerning' or 'Concerning' without any flags."
 # >>> YOUR ANSWER HERE
-
+grep '[cC]oncerning' shakes.txt
 # >>> END YOUR ANSWER
 echo ''
 
 echo "4.d. How many lines in all of Shakespeare contain the string 'love'?"
 # >>> YOUR ANSWER HERE
-
+grep -ie 'love' shakes.txt | wc -l
 # >>> END YOUR ANSWER
 echo ''
 
 echo "4.e. Print the first ten lines in the file containing the string 'love'."
 # >>> YOUR ANSWER HERE
-
+grep 'love' shakes.txt | head
 # >>> END YOUR ANSWER
 echo ''
 
@@ -255,7 +255,7 @@ echo ''
 # on either side, like ' love '.
 echo "4.f. How many lines in Shakespeare contain the string ' love '?"
 # >>> YOUR ANSWER HERE
-
+grep -e ' love ' shakes.txt | wc -l
 # >>> END YOUR ANSWER
 echo ''
 
@@ -267,7 +267,7 @@ echo ''
 # set of characters, including punctuation, e.g. [.,!?]
 echo "4.h. Approximately how many lines in Shakespeare contain the word 'love'?"
 # >>> YOUR ANSWER HERE
-
+grep -e 'love' shakes.txt | wc -l
 # >>> END YOUR ANSWER
 echo ''
 
@@ -275,7 +275,7 @@ echo ''
 # head with n=1 or a flag on `shuf` to do this problem.
 echo "4.i. Print one random line containing the word 'midnight'."
 # >>> YOUR ANSWER HERE
-
+grep 'midnight' shakes.txt | shuf | head -n 1
 # >>> END YOUR ANSWER
 echo ''
 
@@ -286,7 +286,7 @@ echo ''
 # Note this problem might require using `grep` twice.
 echo "4.j. Print one random line containing at least one number and one uppercase letter."
 # >>> YOUR ANSWER HERE
-
+grep -e '[0-9]' shakes.txt | grep -e '[A-Z]' | shuf | head -n 1
 # >>> END YOUR ANSWER
 echo ''
 
@@ -294,7 +294,7 @@ echo ''
 # only prints the lines that do *not* match the pattern.
 echo "4.k. Print one random line which contains no uppercase or lowercase 'A's."
 # >>> YOUR ANSWER HERE
-
+grep -vie '[A]' -e '^$' shakes.txt | shuf | head -n 1
 # >>> END YOUR ANSWER
 echo ''
 
@@ -315,7 +315,7 @@ echo ''
 # twice to deal with capitalization.
 echo "5.a. Print the first ten lines containing 'thy', but with every 'thy' changed to 'your'."
 # >>> YOUR ANSWER HERE
-
+grep -ie ' thy ' shakes.txt | sed 's/ thy / your /g' | sed 's/Thy /Your /g' | head -n 10
 # >>> END YOUR ANSWER
 echo ''
 
@@ -328,14 +328,14 @@ echo ''
 #    cat shakes.txt | sed 's/^ *//' | less
 echo "5.b. In \`sed 's/^ *//'\`, what is getting substituted with what?"
 # >>> YOUR ANSWER HERE
-echo '[write_out_an_answer_here]'
+echo '[Removes any white space up to the first char of a line; essentially shifting entire line to the left]'
 # >>> END YOUR ANSWER
 echo ''
 
 # Remember, '^' also means 'the beginning of the line' for `grep` too.
 echo "5.c. Print all the lines of Shakespeare that start with the word 'thanks'."
 # >>> YOUR ANSWER HERE
-
+grep -e '^thanks ' shakes.txt | wc -l
 # >>> END YOUR ANSWER
 echo ''
 
@@ -346,7 +346,7 @@ echo ''
 # consider how we can delete blank lines (e.g. lines with only whitespace).
 echo "5.d. How many lines is the Shakespeare file without any blank lines?"
 # >>> YOUR ANSWER HERE
-
+sed '/^$/d' shakes.txt | wc -l
 # >>> END YOUR ANSWER
 echo ''
 
@@ -355,7 +355,7 @@ echo ''
 # `sed` commands over and over.
 echo "5.e. Use \`sed\` to make a new file called 'clean_shakes.txt' with no blank lines and no leading whitespace."
 # >>> YOUR ANSWER HERE
-
+sed 's/^ *//' shakes.txt | sed '/^$/d' > clean_shakes.txt
 # >>> END YOUR ANSWER
 echo ''
 
@@ -371,7 +371,7 @@ echo ''
 # `wc -w`. It should match exactly - keep the naive idea of "word" used by `wc`.
 echo "5.f. How many words are in clean_shakes.txt (using \`wc -l\` rather than \`wc -w\`)?"
 # >>> YOUR ANSWER HERE
-
+sed 's/ /\n/g' clean_shakes.txt | sed '/^$/d' | wc -l
 # >>> END YOUR ANSWER
 echo ''
 
@@ -385,7 +385,7 @@ echo ''
 # order of the sort.
 echo "6.a. Order the lines in clean_shakes.txt alphabetically, and print the last ten of them."
 # >>> YOUR ANSWER HERE
-
+sort clean_shakes.txt | tail -n 10
 # >>> END YOUR ANSWER
 echo ''
 
@@ -394,7 +394,7 @@ echo ''
 # we very frequently see `sort | uniq`.
 echo "6.b. How many unique lines are there beginning with the stage direction to 'Enter'?"
 # >>> YOUR ANSWER HERE
-
+grep -e '^Enter' clean_shakes.txt | sort | uniq | wc -l
 # >>> END YOUR ANSWER
 echo ''
 
@@ -408,7 +408,7 @@ echo ''
 # at least 4 pipes in it.
 echo "6.c. What are the top 10 most common words in Shakespeare (naive \`wc\`-style counting)?"
 # >>> YOUR ANSWER HERE
-
+sed 's/ /\n/g' clean_shakes.txt | sed '/^$/d' | sort | uniq -c | sort -nr | head
 # >>> END YOUR ANSWER
 echo ''
 
@@ -429,14 +429,14 @@ echo ''
 # even better!
 echo "6.d. Save an ordered list of all the words in Shakespeare with their counts (smarter counting) to a file called 'word_counts.txt'."
 # >>> YOUR ANSWER HERE
-
+sed 's/ /\n/g' clean_shakes.txt | sed '/^$/d'| tr -d '[:punct:][0-9]'| tr '[A-Z]' '[a-z]' |sort | uniq -c | sort -n > word_counts.txt
 # >>> END YOUR ANSWER
 echo ''
 
 # This is still not perfect. Take a look at the file and think about how.
 echo "6.e. We fixed a bunch of problems - with this method, what new ones did we create?"
 # >>> YOUR ANSWER HERE
-echo "[write_out_an_answer_here]"
+echo "[Since we remove punctutation marks, we're essentially creating new words. 'Can't' becomes 'cant'; but cant and can't are two unique words. ]"
 # >>> END YOUR ANSWER
 echo ''
 
@@ -453,7 +453,7 @@ echo ''
 # use that here. This problem should only be a minor modification on 6.d.
 echo "6.f. Use \`cut\` to extract the first words from each line, and save an ordered list with counts to a file called 'firstword_counts.txt'."
 # >>> YOUR ANSWER HERE
-
+cut -f 1 -d ' ' clean_shakes.txt | sort | uniq -c | sort -n > firstword_counts.txt
 # >>> END YOUR ANSWER
 echo ''
 
@@ -498,7 +498,7 @@ echo ''
 # This allows you to run the command by doing './clean_text.sh'.
 echo "7.a. Create and run the file clean_text.sh."
 # When you've made your script, remove the leading hash below.
-# ./clean_text.sh shakes.txt
+./clean_text.sh shakes.txt
 echo ''
 
 
@@ -507,7 +507,7 @@ echo ''
 # with counts to 'word_counts.txt'.
 echo "7.b. Create and run the file word_counts.sh."
 # When you've made your script, remove the leading hash below.
-# ./word_counts.sh clean_shakes.txt
+./word_counts.sh clean_shakes.txt
 echo ''
 
 
@@ -515,7 +515,7 @@ echo ''
 # scripts* to do all this processing in one go.
 echo "7.c. Create and run the file process_text.sh."
 # When you've made your script, remove the leading hash below.
-# ./process_text.sh shakes.txt
+./process_text.sh shakes.txt
 echo ''
 
 
@@ -545,6 +545,6 @@ echo ''
 # multiple steps and saving intermediate files.
 echo "8.a. Save a list of the most common bigrams and trigrams in Shakespeare to bigram_counts.txt and trigram_counts.txt, respectively."
 # >>> YOUR ANSWER HERE
-
+# TODO: 
 # >>> END YOUR ANSWER
 echo ''

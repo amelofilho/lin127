@@ -1,0 +1,250 @@
+##########################################
+#   LIN 127                               
+#   Text Processing and Corpus Linguistics
+#   Assignment 2                          
+##########################################
+
+#### 0. Info
+
+Name: Adriano Melo Filho
+My comments or questions on the assignment are: 
+
+
+
+######################
+# Core Exercises (1-7)
+######################
+
+
+#### 1. Preparations
+
+1.a. Obtain the complete works of Shakespeare (using wget)! Make sure to rename the file as "shakes.txt" as you download it.
+
+
+
+#### 2. wc
+
+2.a. About how many lines did Shakespeare write?
+  122458
+
+2.b. About how many words did Shakespeare write?
+  883320
+
+2.c. What might be wrong about these estimates?
+[they might not be accurate because wc counts words based on whitespace, so words with punctuation or special characters might be miscounted]
+
+
+
+#### 3. head/tail
+
+3.a. Print the first ten lines of shakes.txt!
+1609
+
+THE SONNETS
+
+by William Shakespeare
+
+
+
+                     1
+  From fairest creatures we desire increase,
+
+3.b. Print the last ten lines of shakes.txt!
+
+  'O, that infected moisture of his eye,
+  O, that false fire which in his cheek so glowed,
+  O, that forced thunder from his heart did fly,
+  O, that sad breath his spongy lungs bestowed,
+  O, all that borrowed motion, seeming owed,
+  Would yet again betray the fore-betrayed,
+  And new pervert a reconciled maid.'
+
+THE END
+
+3.c. What line does Shakespeare's eighteenth sonnet start on in the file?
+[297]
+
+3.d. What line does Shakespeare's eighteenth sonnet end on in the file?
+[312]
+
+3.e. Print the text of Shakespeare's eighteenth sonnet in one command.
+                     18
+  Shall I compare thee to a summer's day?
+  Thou art more lovely and more temperate:
+  Rough winds do shake the darling buds of May,
+  And summer's lease hath all too short a date:
+  Sometime too hot the eye of heaven shines,
+  And often is his gold complexion dimmed,
+  And every fair from fair sometime declines,
+  By chance, or nature's changing course untrimmed:  
+  But thy eternal summer shall not fade,
+  Nor lose possession of that fair thou ow'st,
+  Nor shall death brag thou wand'rest in his shade,
+  When in eternal lines to time thou grow'st,
+    So long as men can breathe or eyes can see,
+    So long lives this, and this gives life to thee.
+
+3.f. How many words are in Shakespeare's eighteenth sonnet?
+     115
+
+
+
+#### 4. grep
+
+4.a. Print all the lines containing 'commendable'.
+    And power, unto itself most commendable,
+  King. 'Tis sweet and commendable in your nature, Hamlet,
+    phrases are surely, and ever were, very commendable.
+    And, commendable prov'd, let's die in pride.          Exeunt
+  GRATIANO. Thanks, i' faith, for silence is only commendable
+    commendable in none only but parrots. Go in, sirrah; bid them
+  Urs. Sure, sure, such carping is not commendable.
+    As Beatrice is, cannot be commendable.
+    More quaint, more pleasing, nor more commendable;
+
+4.b. Print all the lines containing 'conspiracy' or 'Conspiracy'.
+    Confirm'd conspiracy with fearful France;
+  MARCUS BRUTUS, leader of the conspiracy against Caesar
+  CASSIUS, instigator of the conspiracy
+    They are the faction. O Conspiracy,
+    To mask thy monstrous visage? Seek none, Conspiracy;
+    about you. Security gives way to conspiracy. The mighty gods
+     Hum! Conspiracy? 'Sleep till I wak'd him, you should enjoy half
+    rascals, there's a knot, a ging, a pack, a conspiracy
+    Wilt thou conceal this dark conspiracy?
+  BOLINGBROKE. O heinous, strong, and bold conspiracy!
+    Open-ey'd conspiracy
+  PROSPERO.  [Aside]  I had forgot that foul conspiracy
+    That it was yours. Now for conspiracy:
+
+4.c. Print all lines containing 'concerning' or 'Concerning' without any flags.
+    Such dear concernings hide? Who would do so?  
+    That task our thoughts, concerning us and France.
+    concerning the disciplines of the war, the Roman wars, in the way
+    Concerning the French journey. I replied
+    concerning his imprisonment was rather-
+  COSTARD. The matter is to me, sir, as concerning Jaquenetta.
+    Sir Nathaniel, as concerning some entertainment of time, some
+    As time and our concernings shall importune,
+    Between you 'greed concerning her observance?
+    concerning your marriage.
+    Concerning you.
+    Concerning this, sir- O well-painted passion!-
+  CLOWN. What is the opinion of Pythagoras concerning wild fowl?
+  LUCETTA. Nothing concerning me.
+
+4.d. How many lines in all of Shakespeare contain the string 'love'?
+    2653
+
+4.e. Print the first ten lines in the file containing the string 'love'.
+  Of his self-love to stop posterity?  
+  Calls back the lovely April of her prime,
+  Unthrifty loveliness why dost thou spend,
+  The lovely gaze where every eye doth dwell
+    No love toward others in that bosom sits
+  For shame deny that thou bear'st love to any
+  Grant if thou wilt, thou art beloved of many,
+  Shall hate be fairer lodged than gentle love?
+    Make thee another self for love of me,
+  O that you were your self, but love you are
+
+4.f. How many lines in Shakespeare contain the string ' love '?
+    1092
+
+4.h. Approximately how many lines in Shakespeare contain the word 'love'?
+    2484
+
+4.i. Print one random line containing the word 'midnight'.
+    midnight, at Herne's oak, and you shall see wonders.
+
+4.j. Print one random line containing at least one number and one uppercase letter.
+SCENE 2
+
+4.k. Print one random line which contains no uppercase or lowercase 'A's.
+    Corrupting in it own fertility.
+
+
+
+#### 5. sed
+
+5.a. Print the first ten lines containing 'thy', but with every 'thy' changed to 'your'.
+  Feed'st your light's flame with self-substantial fuel,
+  Your self your foe, to your sweet self too cruel:
+  Within thine own bud buriest your content,
+  When forty winters shall besiege your brow,
+  And dig deep trenches in your beauty's field,
+  Your youth's proud livery so gazed on now,
+  Then being asked, where all your beauty lies,
+  Where all the treasure of your lusty days;
+  How much more praise deserved your beauty's use,
+    And see your blood warm when thou feel'st it cold.
+
+5.b. In `sed 's/^ *//'`, what is getting substituted with what?
+[Removes any white space up to the first char of a line; essentially shifting entire line to the left]
+
+5.c. Print all the lines of Shakespeare that start with the word 'thanks'.
+       0
+
+5.d. How many lines is the Shakespeare file without any blank lines?
+  113063
+
+5.e. Use `sed` to make a new file called 'clean_shakes.txt' with no blank lines and no leading whitespace.
+
+5.f. How many words are in clean_shakes.txt (using `wc -l` rather than `wc -w`)?
+  883320
+
+
+
+#### 6. sort, uniq, tr, and cut
+
+6.a. Order the lines in clean_shakes.txt alphabetically, and print the last ten of them.
+Youth to itself rebels, though none else near.
+youth, and he that hath no beard is less than a man; and he that
+Youth, beauty, wisdom, courage, all
+youth, I blame ye not;
+youth, must confess, are wags too.
+Youth's a stuff will not endure.
+Zeal and obedience he still bore your Grace,
+zounds, I lie; for they pray continually to their saint, the  
+Zounds, I will speak of him, and let my soul
+Zounds! I was never so bethump'd with words  
+
+6.b. How many unique lines are there beginning with the stage direction to 'Enter'?
+    1508
+
+6.c. What are the top 10 most common words in Shakespeare (naive `wc`-style counting)?
+23197 the
+19540 I
+18263 and
+15592 to
+15507 of
+12516 a
+10824 my
+9565 in
+9059 you
+7831 is
+
+6.d. Save an ordered list of all the words in Shakespeare with their counts (smarter counting) to a file called 'word_counts.txt'.
+
+6.e. We fixed a bunch of problems - with this method, what new ones did we create?
+[Since we remove punctutation marks, we're essentially creating new words. 'Can't' becomes 'cant'; but cant and can't are two unique words. ]
+
+6.f. Use `cut` to extract the first words from each line, and save an ordered list with counts to a file called 'firstword_counts.txt'.
+
+
+
+#### 7. Scripting
+
+7.a. Create and run the file clean_text.sh.
+
+7.b. Create and run the file word_counts.sh.
+
+7.c. Create and run the file process_text.sh.
+
+7.d. Run your a2.sh file and save its output to assignment_output.txt
+
+
+#### 8. Unix for Poets
+
+8.a. Save a list of the most common bigrams and trigrams in Shakespeare to bigram_counts.txt and trigram_counts.txt, respectively.
+
