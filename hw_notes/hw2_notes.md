@@ -49,6 +49,8 @@
             - `cut -f 3 -d ',' file.txt`
             - This will take every line in `file.txt`, cut the line up at every comma, and print the third comma-separated chunk. 
             - We can make the delimiter a `' '` too
+- source 
+    - **source** is a Bash shell built-in command that executes the content of the file passed as an argument in the current shell. It has a synonym in `.` (period). [source](https://superuser.com/questions/46139/what-does-source-do)
 
 ### 'Shebang' (`#!`)
 
