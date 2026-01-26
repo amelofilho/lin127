@@ -45,7 +45,7 @@ assignment are presented as well, which is useful for multi-line comments.
 # >>> YOUR ANSWER HERE
 name = 'Adriano Melo Filho'
 comments_or_questions = """
-[your_comments_here]
+[i got nothing so far...]
 """
 completed = False
 # >>> END YOUR ANSWER
@@ -90,101 +90,100 @@ Just answer very briefly! No need for an essay.
 Remember you can wrap anything in type() to display its type if you're unsure.
 
 """
-TODO:
 print('a. university + department')
 # >>> YOUR ANSWER HERE
-print('[your answer here]')
+print('[UC DavisLinguistics]')
 # >>> END YOUR ANSWER
 print('')
 
-TODO:
+
 print('b. department + course_number')
 # >>> YOUR ANSWER HERE
-print('[your answer here]')
+print('[TypeError: can only concatenate str (not "int") to str]')
 # >>> END YOUR ANSWER
 print('')
 
-# TODO:
+
 print('c. university * class_size')
 # >>> YOUR ANSWER HERE
-print('[your answer here]')
+print('[UC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC DavisUC Davis]')
 # >>> END YOUR ANSWER
 print('')
 
-# TODO:
+
 print('d. int(department)')
 # >>> YOUR ANSWER HERE
-print('[your answer here]')
+print("[ValueError: invalid literal for int() with base 10: Linguistics']")
 # >>> END YOUR ANSWER
 print('')
 
-# TODO:
+
 print('e. class_size / total_students')
 # >>> YOUR ANSWER HERE
-print('[your answer here]')
+print('[0.0014933411672542107]')
 # >>> END YOUR ANSWER
 print('')
 
-# TODO:
+
 print('f. virtual_class and having_fun')
 # >>> YOUR ANSWER HERE
-print('[your answer here]')
+print('[False]')
 # >>> END YOUR ANSWER
 print('')
-# TODO:
+
 print('g.  expected_gpa and virtual_class')
 # >>> YOUR ANSWER HERE
-print('[your answer here]')
+print('[False]')
 # >>> END YOUR ANSWER
 print('')
-# TODO:
+
 print('h. worries and virtual_class')
 # >>> YOUR ANSWER HERE
-print('[your answer here]')
+print('[returns none type which is just moving to next line.]')
 # >>> END YOUR ANSWER
 print('')
-# TODO:
+
 print('i. virtual_class and worries')
 # >>> YOUR ANSWER HERE
-print('[your answer here]')
+print('[False]')
 # >>> END YOUR ANSWER
 print('')
-# TODO:
+
 print('j. worries + university')
 # >>> YOUR ANSWER HERE
-print('[your answer here]')
+print("[TypeError: unsupported operand type(s) for +: 'NoneType' and 'str']")
 # >>> END YOUR ANSWER
 print('')
 
-# TODO:
+
 print('k. having_fun > total_students')
 # >>> YOUR ANSWER HERE
-print('[your answer here]')
+print('[False]')
 # >>> END YOUR ANSWER
 print('')
 
-# TODO:
+
 print('l. department[1532:]')
 # >>> YOUR ANSWER HERE
-print('[your answer here]')
+print('['']')
 # >>> END YOUR ANSWER
 print('')
-# TODO:
+
 print('m. department[1532]')
 # >>> YOUR ANSWER HERE
-print('[your answer here]')
+print('[IndexError: string index out of range]')
 # >>> END YOUR ANSWER
 print('')
-# TODO:
+
 print('n. dprtmnt')
 # >>> YOUR ANSWER HERE
-print('[your answer here]')
+print("[NameError: name 'dprtmnt' is not defined. Did you mean: 'department'?]")
 # >>> END YOUR ANSWER
 print('')
-# TODO:
+
 print('o. if worries: print("OH NO")')
 # >>> YOUR ANSWER HERE
-print('[your answer here]')
+print('[...]')
 # >>> END YOUR ANSWER
 print('')
 
@@ -270,10 +269,12 @@ help on how particular functions work using e.g. help(sum) in the interpreter.
 def mean(vals):
     """Return the mean of the values in `vals`,
     a list of numbers (float or int)."""
-    # TODO:
     # Delete pass and fill in your function.
     # >>> YOUR ANSWER HERE
-    pass
+    total = 0
+    for values in vals:
+        total += values
+    return total/len(vals)
     # >>> END YOUR ANSWER
 
 tests = [
@@ -294,11 +295,14 @@ Hint: it'll help to use the 'string' module, which is imported for you. Look at
 the attributes on it.
 """
 def letters_only(s):
-    # TODO:
     # Delete pass and fill in.
     import string
     # >>> YOUR ANSWER HERE
-    pass
+    new_string = ''
+    for c in s:
+        if c in string.ascii_letters:
+            new_string += c
+    return new_string
     # >>> END YOUR ANSWER
 
 tests = [
@@ -320,10 +324,16 @@ returns an integer. This should work regardless of whether the vowels are
 capitalized.
 """
 def vowel_count(s):
-    # TODO:
     # Delete pass and fill in your function.
     # >>> YOUR ANSWER HERE
-    pass
+    vowels = 'aeiou'
+    s = s.lower()
+    
+    count = 0
+    for c in s:
+        if c in vowels:
+            count += 1
+    return count
     # >>> END YOUR ANSWER
 
 tests = [
@@ -347,10 +357,12 @@ case: a) consider what happens when you cast a string to list, b) look at the
 `pop` method that lists have.
 """
 def reverse_string(s):
-    # TODO:
     # Delete pass and fill in your function.
     # >>> YOUR ANSWER HERE
-    pass
+    rev_s = ''
+    for c in s:
+        rev_s = c + rev_s  # prepend approach
+    return rev_s
     # >>> END YOUR ANSWER
 
 tests = [
@@ -383,10 +395,14 @@ the strings are the same length you can put either one in the middle.
 """
 
 def string_squish(s1, s2):
-    # TODO:
     # Delete pass and fill in your function.
     # >>> YOUR ANSWER HERE
-    pass
+    long = s1
+    short = s2
+    if (len(s1) < len(s2)):
+        long = s2
+        short = s1
+    return short + long.upper() + short
     # >>> END YOUR ANSWER
 
 tests = [
@@ -418,11 +434,17 @@ new list if they aren't in the provided list of stopwords (using the keyword
 `in`). Then use ' '.join() to re-join the new list into a string, and return it.
 """
 def remove_stopwords(s):
-    # TODO:
     # Delete pass and fill in.
     stopwords = ['a', 'an', 'and', 'if', 'in', 'it', 'of', 'on', 'the', 'then', 'which','with']
     # >>> YOUR ANSWER HERE
-    pass
+    s_clean = []
+    tokens = s.split(' ')
+    for w in tokens:
+        if w not in stopwords:
+            s_clean.append(w)
+    final = ' '.join(s_clean)
+    print(final)
+    return final
     # >>> END YOUR ANSWER
 
 tests = [
@@ -453,13 +475,24 @@ This will be made a lot easier if you use the 'and' or 'or' keywords to make
 compound conditional statements.
 """
 def roll_the_dice(d1, d2):
-    # TODO:
     # Delete pass and fill in.
     not_dice_message = "These aren't dice!"
     win_message = "YOU WIN!!!"
     lose_message = "You lose..."
     # >>> YOUR ANSWER HERE
-    pass
+    if(type(d1)!= int or type(d2)!= int): # int check
+        return not_dice_message
+    
+    if (d1 > 6 or d1 < 1 or d2 > 6 or d2 < 1): # valid die check
+        return not_dice_message
+    
+    sum = (d1 + d2)
+    if sum == 7 or sum == 11: # roll outcomes
+        return win_message
+    else:
+        return lose_message
+    
+
     # >>> END YOUR ANSWER
 
 tests = [
@@ -615,6 +648,7 @@ This will require the use of if/elif/else control flow; also look at the
 `round` built-in function.
 """
 def human_number(num):
+    #TODO:
     # Delete pass and fill in your function.
     # >>> YOUR ANSWER HERE
     pass
@@ -639,6 +673,7 @@ So an input of 123456789 would return a string '123,456,789'. Consider using
 the modulo operator (%) to achieve this.
 """
 def just_add_commas(num):
+    #TODO:
     # Delete pass and fill in your function.
     # >>> YOUR ANSWER HERE
     pass
@@ -676,6 +711,7 @@ out this function with any word instead of wally for fun!
 """
 
 def find_wallys(target='wally'):
+    #TODO:
     # Delete pass and fill in.
     wallys = []
     # >>> YOUR ANSWER HERE
