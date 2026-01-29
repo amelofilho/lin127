@@ -39,11 +39,11 @@
     - The standard `tr` worked differently some years ago! 
     - Welcome to version differences - an eternal problem.
 
----
+# Python
 
-### Python
+### Abstraction
 
-
+Abstraction is powerful but dangerous. Modern software depends on layers of abstraction maintained by people you’ll never meet, and when something breaks, it can be extremely hard to trace the cause. This applies to Unix tools, Python libraries, and everything we build on top of them.
 
 ### Data as Objects
 
@@ -64,7 +64,18 @@ Statements are units of code that do something. Assignment creates bindings betw
 
 These examples show that Python’s operators often work across types, but not always in ways you’d expect unless you understand the underlying objects.
 
-### Functions as Input–Process–Output Machines
+### Equality Testing
+
+Python supports standard comparison operators:
+
+    >>> year != 2016
+    True
+    >>> mssg == 'howdy!'
+    False
+    >>> e <= 3
+    True
+
+### Function: Input–Process–Output Machines
 
 Functions are one of the most important abstractions in programming. Conceptually, every function follows the same pattern: it takes input, performs computation, and produces output. Some functions return values, others return None, but all of them encapsulate logic so you don’t have to repeat yourself.
 
@@ -78,6 +89,17 @@ When you define a function, you give Python a reusable block of code with a name
         return 42
 
 This structure is Python’s way of enforcing clarity. If the indentation is wrong, the program is wrong.
+
+Important built-in functions include:
+- print(x)
+- help(x)
+- type(x)
+- dir(x)
+- sorted(x)
+- min(x), max(x)
+- sum(x)
+- int(x), float(x), bool(x)
+- list(x), tuple(x), str(x)
 
 ### Control Flow with Conditionals
 
@@ -94,23 +116,40 @@ Only one branch executes, and Python checks conditions from top to bottom until 
 
 ### Loops for Repetition
 
-Loops let us repeat actions. A for loop iterates over items in a sequence, whether that’s a list, a range of numbers, or lines in a file.
+Loops let us repeat actions. A `for` loop iterates over items in a sequence, whether that’s a list, a range of numbers, or lines in a file.
+
+    words = ['cat', 'window', 'defenestrate']
+    for w in words:
+        print(w, len(w))
+    
+    for i in range(5):
+        print(i)
 
     for line in open('shakes.txt'):
         print(line)
 
-A while loop repeats until a condition becomes false, which is useful when you don’t know in advance how many iterations you’ll need.
+A `while` loop repeats until a condition becomes false, which is useful when you don’t know in advance how many iterations you’ll need.
+
+    a, b = 0, 1
+    while a < 10:
+        print(a, end=' ')
+        a, b = b, a + b
 
 ### Whitespace as Syntax
 
-Unlike many languages, Python uses whitespace to define code structure. Function bodies and control-flow blocks must be indented consistently. This design choice forces readability and eliminates entire classes of bugs that come from mismatched braces in other languages.
+Unlike many languages, Python uses whitespace to define code structure. Function bodies and control-flow blocks must be indented consistently. This design choice forces readability and eliminates entire classes of bugs that come from mismatched braces in other languages. Editors help by auto-indenting Python files, but you must still be careful when closing blocks.
 
 ### Indexing and Slicing Sequences
 
-Strings and lists are sequences, which means they support indexing and slicing. Indexing starts at zero, and negative indices count from the end.
+Strings and lists are sequences, which means they support indexing and slicing. 
+- Indexing starts at zero, and negative indices count from the end.
+- Syntax: `sequence[start:end]`
+
+###
 
     job_title = 'LINGUIST'
     job_title[3:-1]
+    job_title[:5]
 
 Slices include the start index but exclude the end index, a rule that stays consistent across Python.
 
@@ -126,12 +165,20 @@ This is why you’ll often see dot notation—methods belong to objects, not to 
 
 ### String and List Methods
 
-Strings and lists have rich sets of methods. String methods like strip, lower, find, and replace return new strings. List methods like append, remove, and pop modify lists in place. This distinction—immutability versus mutability—is critical and will come up repeatedly in future weeks.
+Strings and lists have rich sets of methods. String methods like strip, lower, find, and replace return new strings. List methods like append, remove, and pop modify lists in place. This distinction—**immutability** vs **mutability**—is critical and will come up repeatedly in future weeks.
 
 ### Strings vs. Lists
 
-Strings and lists are both sequences, but strings are immutable and lists are mutable. You can change a list element directly, but you cannot change a character inside a string. Converting between the two using split and join is a common pattern in text processing.
+Strings and lists are both sequences, but strings are immutable and lists are mutable. You can change a list element directly, but you cannot change a character inside a string. 
+
+Converting between the two using split and join is a common pattern in text processing.
 
 ### Decomposition and Assignment Strategy
 
 Finally, when working on assignments, the key skill is decomposition. Break problems into smaller subproblems, test each piece, and rely on provided tests as guides—not guarantees. Your code must always run from start to finish without manual intervention.
+
+
+
+
+
+

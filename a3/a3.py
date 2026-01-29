@@ -6,29 +6,29 @@ print("""
 ##########################################
 
 """)
-#
+
 # Welcome to week 3!
-#
+
 # Yet again we're faced with a new sort of file! Last week we had a '.sh' file,
 # which is a bash/shell script. This week we're starting to work in python, and
 # '.py' is the standard file extension for python scripts and code.
-#
+
 # You may remember me saying file extensions are just a suggestion, which is
 # true - '.txt', '.sh', and '.py' are all just plain text files under the hood.
 # But they are helpful suggestions that provide your text editor with an idea of
 # what sort of syntax highlighting to use. Syntax highlighting is *very* useful
 # and I suggest you make sure your editor is doing it. emacs and vim will do it
 # by default, and nano requires edits to nanorc, described in the first assignment.
-#
+
 # We will be working with Python 3. In later assignments we will have to handle
 # environments and packages, but this assignment should work on nearly any default
 # installation of Python 3. 
-#
+
 # You can run this entire file as a script by running:
 #   python3 a3.py
 # This will print out your answers, as well as output from testing functions
 # that will test your code in the later parts of the assignment.
-#
+
 
 print("""
 -----------------------------------------
@@ -41,13 +41,13 @@ completed the assignment. Notice how you can do multi-line strings by starting
 and ending with three double-quotes. This is how most of the instructions in the
 assignment are presented as well, which is useful for multi-line comments.
 """
-# TODO:
+
 # >>> YOUR ANSWER HERE
 name = 'Adriano Melo Filho'
 comments_or_questions = """
 [i got nothing so far...]
 """
-completed = False
+completed = True
 # >>> END YOUR ANSWER
 
 print('Name: ' + name)
@@ -532,10 +532,21 @@ any numbers in the string-- use your letters_only function.
 """
 
 def palindrome_detector(s):
-    # TODO:
     # Delete pass and fill in your function.
     # >>> YOUR ANSWER HERE
-    pass
+    
+    s_clean = ''.join([char.lower() for char in s if (char.isalpha())])
+    
+    # print(s_clean) # check string before comparing...
+
+    i = 0
+    j = len(s_clean) - 1
+    while (i < j):
+        if s_clean[i] != s_clean[j]:
+            return False
+        i += 1
+        j -= 1
+    return True
     # >>> END YOUR ANSWER
 
 tests = [
@@ -575,12 +586,25 @@ vowels for each word in this file.
 """
 
 def proportion_of_vowels_in_english():
-    # TODO:
     # Delete pass and fill in.
     total_vowels = 0
     total_letters = 0
     # >>> YOUR ANSWER HERE
-    pass
+    import string
+    vowels = 'aeiou'
+    path = '/usr/share/dict/web2'
+
+    for line in open(path):
+        line_merged = ''.join([char.lower() for char in line if (char.isalpha())])
+        for char in line_merged:
+            total_letters += 1
+            if char in vowels:
+                total_vowels += 1
+        
+        
+        
+    print("Total vowels:", total_vowels, "\nTotal letters: ", total_letters)
+
     # >>> END YOUR ANSWER
     return total_vowels / total_letters
 
@@ -607,11 +631,18 @@ called with simply `find_long_palindromes()`, in which case min_length will be
 `min_length` to 4.
 """
 def find_long_palindromes(min_length = 6):
-    # TODO:
     # Delete pass and fill in.
     palindromes = []
     # >>> YOUR ANSWER HERE
-    pass
+    path = '/usr/share/dict/web2'
+    
+    for line in open(path): # each line is a string 
+        word = line.strip() # removes new line char
+        word_clean = letters_only(word)
+        if len(word_clean) >= min_length and palindrome_detector(word_clean):
+            # print(word_clean)
+            palindromes.append(word_clean)
+
     # >>> END YOUR ANSWER
     return palindromes
 
@@ -621,6 +652,7 @@ if len(long_palindromes) == 0:
 else:
     for palindrome in long_palindromes:
         print('\t', palindrome)
+        
 
 
 
@@ -648,10 +680,26 @@ This will require the use of if/elif/else control flow; also look at the
 `round` built-in function.
 """
 def human_number(num):
-    #TODO:
     # Delete pass and fill in your function.
     # >>> YOUR ANSWER HERE
-    pass
+
+    face = 0
+
+    if num < 1_000_000:
+        return str(num)
+    
+    if num >= 1_000_000 and num < 999_999_999: # handles millions
+        face = round(num/1_000_000, 2)
+        return str(face) + " million"
+    
+    if num >= 1_000_000_000 and num < 999_999_999_999:
+        face = round(num/1_000_000_000, 2)
+        return str(face) + " billion"
+    
+    if num >= 1_000_000_000_000:
+        face = round(num/1_000_000_000_000, 2)
+        return str(face) + " trillion"
+
     # >>> END YOUR ANSWER
 
 tests = [
@@ -673,10 +721,22 @@ So an input of 123456789 would return a string '123,456,789'. Consider using
 the modulo operator (%) to achieve this.
 """
 def just_add_commas(num):
-    #TODO:
-    # Delete pass and fill in your function.
     # >>> YOUR ANSWER HERE
-    pass
+    
+    num_s = str(num)
+    num_reverse = list(num_s[::-1])
+    # print(num_reverse)
+    
+    num_list = []
+    for i, digit in enumerate(num_reverse):
+        if i > 0 and i % 3 == 0: # steps every 3 digits
+            num_list.append(',')
+        num_list.append(digit)
+
+    num_list.reverse()
+    # print(''.join(num_list))
+    return ''.join(num_list)
+
     # >>> END YOUR ANSWER
 
 tests = [
@@ -711,12 +771,24 @@ out this function with any word instead of wally for fun!
 """
 
 def find_wallys(target='wally'):
-    #TODO:
     # Delete pass and fill in.
     wallys = []
     # >>> YOUR ANSWER HERE
-    pass
+    path = '/usr/share/dict/web2'
+    
+    for line in open(path): # each line is a string
+        word = letters_only(line.strip()).lower() # removes new line char
+
+        i = 0 # to compare agianst target 'wally'
+        for char in word:
+            if i < len(target) and char == target[i]: #while we're still not end of word and chars matches
+                i += 1
+
+        if i == len(target): #if we make it to the end, word contains wally
+            wallys.append(line.strip())
+
     # >>> END YOUR ANSWER
+    # print(wallys)
     return wallys
 
 wallys = find_wallys()
