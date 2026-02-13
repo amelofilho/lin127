@@ -684,20 +684,23 @@ def human_number(num):
     # >>> YOUR ANSWER HERE
 
     face = 0
+    million = 1_000_000
+    billion = 1_000_000_000
+    trillion = 1_000_000_000_000
 
-    if num < 1_000_000:
+    if num < million:
         return str(num)
     
-    if num >= 1_000_000 and num < 999_999_999: # handles millions
-        face = round(num/1_000_000, 2)
+    if num >= million and num < 999_999_999: # handles millions
+        face = round(num/million, 2)
         return str(face) + " million"
     
-    if num >= 1_000_000_000 and num < 999_999_999_999:
-        face = round(num/1_000_000_000, 2)
+    if num >= billion and num < 999_999_999_999:
+        face = round(num/billion, 2)
         return str(face) + " billion"
     
-    if num >= 1_000_000_000_000:
-        face = round(num/1_000_000_000_000, 2)
+    if num >= trillion:
+        face = round(num/trillion, 2)
         return str(face) + " trillion"
 
     # >>> END YOUR ANSWER
