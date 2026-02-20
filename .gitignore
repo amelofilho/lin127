@@ -13,3 +13,9 @@ walley*
 hw3*
 output*
 
+a5_assignment_txt_version.txt
+CMUDict_text_ver.txt
+sample.txt
+
+# for checkpoints not appearing
+.ipynb*
